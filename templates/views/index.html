@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+    Todo | Home
+{% endblock %}
+
+{% block body %}
+	<div class="my-4">
+		<div class="container">
+			<nav class="bg-dark text-light p-2">
+				<form class="form" action="/add" method="post">
+					<legend class="">Create New Task</legend>
+					<div class="mb-3 row">
+						<div class="col-md-6">
+							<input type="text" class="form-control form-control-sm" name="title" placeholder="Task title here" required />
+						</div>
+						<!-- <div class="col-auto">
+							<div class="form-control form-control-sm bg-dark text-light">
+								<input type="radio" id="notCompleted" class="mr-2" name="completed" value="False" checked/> <label for="notCompleted"> Not Completed </label>
+								<input type="radio" id="completed" class="" name="completed" value="True" /> <label for="completed"> Completed </label>
+							</div>
+						</div> -->
+						<div class="col-auto mr-0 ml-auto">
+							<button type="submit" class="col-auto form-control form-control-sm btn btn-sm btn-success"> Create </button>
+						</div>
+					</div>
+				</form>
+			</nav>
+			
+
+			<div class="table-responsive">
+				<table class="table table-striped caption-top">
+					<caption class="text-center">List of Tasks</caption>
+					<thead>
+						<tr>
+							<th scope="col">Title</th>
+							<th scope="col">Status</th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for todo in todo_list %}
+							<tr>
+								<td scope="col">{{ todo.id  }} | {{ todo.title }}</td>
+								<td scope="col">
+									{% if todo.completed == True %}
+										<span> Completed </span>
+									{% else %}
+										<span> Not Completed </span>
+									{% endif %}
+								</td>
+								<td scope="col">
+									<a href="/update/{{todo.id}}" class="btn btn-primary">Update</a>
+									<a href="/delete/{{todo.id}}" class="btn btn-danger">Delete</a>
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+{% endblock %}
+
