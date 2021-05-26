@@ -14,7 +14,7 @@ class Todo(db.Model):
     completed = db.Column(db.Boolean)
     # created_at = db.Column(db.datetime.utc.now())
 
-@app.route('/')
+@app.route('/', methods=["GET"])
 def index():
     todo_list = Todo.query.all()
     return render_template('views/index.html', todo_list=todo_list)
